@@ -25,7 +25,8 @@ def get_paket(request):
 		if ret['status'] == 'success' and ret['pesan'] == 'data ada':
 			ret_list = {'data': ret['data'], 'query': ret['query'], 'website': ret['website']}
 			return render(request, 'result.html', ret_list)
-		return render(request, '404.html')		
+		elif ret['status'] == 'error' and ret['pesan'] == 'data tidak ada':
+			return render(request, '404.html')
 	except Exception as e:
 		print(e)
 		return render(request, 'cek_koneksi.html')		
