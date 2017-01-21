@@ -29,6 +29,7 @@ def get_paket(request):
 			return render(request, '404.html')
 	except Exception as e:
 		print(e)
-		return render(request, 'cek_koneksi.html')		
+		# return render(request, 'cek_koneksi.html')		
+		return render(request, 'cek_koneksi.html', e)		
 	
 	
