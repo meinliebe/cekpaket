@@ -19,17 +19,24 @@ def get_paket(request):
 	keys = '7b5c7b3dce3a4719738a644b99315d4c'
 	params = {'pengirim': pengirim, 'resi': resi, 'k': keys}
 
-	try:
-		r = requests.get(url, params=params)
-		ret = r.json()
-		if ret['status'] == 'success' and ret['pesan'] == 'data ada':
-			ret_list = {'data': ret['data'], 'query': ret['query'], 'website': ret['website']}
-			return render(request, 'result.html', ret_list)
-		elif ret['status'] == 'error' and ret['pesan'] == 'data tidak ada':
-			return render(request, '404.html')
-	except Exception as e:
-		print(e)
-		# return render(request, 'cek_koneksi.html')		
-		return render(request, 'cek_koneksi.html', {'e': e})		
+	r = requests.get(url, params=params)
+	ret = r.json()
+	if ret['status'] == 'success' and ret['pesan'] == 'data ada':
+		ret_list = {'data': ret['data'], 'query': ret['query'], 'website': ret['website']}
+		return render(request, 'result.html', ret_list)
+	elif ret['status'] == 'error' and ret['pesan'] == 'data tidak ada':
+		return render(request, '404.html')
+
+	# try:
+	# 	r = requests.get(url, params=params)
+	# 	ret = r.json()
+	# 	if ret['status'] == 'success' and ret['pesan'] == 'data ada':
+	# 		ret_list = {'data': ret['data'], 'query': ret['query'], 'website': ret['website']}
+	# 		return render(request, 'result.html', ret_list)
+	# 	elif ret['status'] == 'error' and ret['pesan'] == 'data tidak ada':
+	# 		return render(request, '404.html')
+	# except Exception as e:
+	# 	print(e)
+	# 	return render(request, 'cek_koneksi.html')
 	
 	
